@@ -1,6 +1,10 @@
+import { Button } from "@radix-ui/themes";
 
 export default function Home() {
   return (
-    <h1>Expense Manager</h1>
+    <div>
+
+      <h1>Expense Manager</h1>
+    </div>
   );
 }
