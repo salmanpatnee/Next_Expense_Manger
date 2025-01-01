@@ -12,3 +12,11 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Expense {
+  id        Int      @id @default(autoincrement()) // Primary Key
+  title     String                                // Description of the expense
+  amount    Float                                 // Expense amount
+  category  String                                // Expense category
+  date      DateTime @default(now())              // Date of the expense
+}
