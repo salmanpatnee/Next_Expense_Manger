@@ -9,14 +9,14 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model Expense {
-  id        Int      @id @default(autoincrement()) // Primary Key
-  title     String                                // Description of the expense
-  amount    Float                                 // Expense amount
-  category  String                                // Expense category
-  date      DateTime @default(now())              // Date of the expense
+  id     Int      @id @default(autoincrement())
+  title  String
+  amount Float
+  date   DateTime @default(now())
 }
