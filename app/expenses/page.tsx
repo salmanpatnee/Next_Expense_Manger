@@ -15,6 +15,7 @@ const ExpensesPage = async () => {
             <Table.ColumnHeaderCell>S.No</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>Expense</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>Amount</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell>Date</Table.ColumnHeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -23,6 +24,7 @@ const ExpensesPage = async () => {
               <Table.Cell>{index + 1}</Table.Cell>
               <Table.Cell>{expense.title}</Table.Cell>
               <Table.Cell>{expense.amount}</Table.Cell>
+              <Table.Cell>{expense.date.toDateString()}</Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>

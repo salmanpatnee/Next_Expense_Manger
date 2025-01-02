@@ -13,6 +13,7 @@ const ExpenseLoadingPage = () => {
             <Table.ColumnHeaderCell>S.No</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>Expense</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>Amount</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell>Date</Table.ColumnHeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -31,6 +32,11 @@ const ExpenseLoadingPage = () => {
               <Table.Cell>
                 <Text>
                   <Skeleton>1000</Skeleton>
+                </Text>
+              </Table.Cell>
+              <Table.Cell>
+                <Text>
+                  <Skeleton>Thursday, 2 January 2025</Skeleton>
                 </Text>
               </Table.Cell>
             </Table.Row>
