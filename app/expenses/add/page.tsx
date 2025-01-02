@@ -5,13 +5,25 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { MdErrorOutline } from "react-icons/md";
-interface ExpenseForm {
-  title: string;
-  amount: number;
-}
+import { zodResolver } from "@hookform/resolvers/zod";
+import { createExpenseSchema } from "@/app/validationSchemas";
+import {z} from "zod"
+import ErrorMessage from "@/app/components/ErrorMessage";
+
+
+
+// Instead of creating an interface
+/* interface ExpenseForm {
+  title: string
+}*/
+
+//Created a type based on zod schema
+type ExpenseForm = z.infer<typeof createExpenseSchema>
 
 const AddExpensePage = () => {
-  const { register, handleSubmit } = useForm<ExpenseForm>();
+  const { register, handleSubmit, formState: {errors} } = useForm<ExpenseForm>({
+    resolver: zodResolver(createExpenseSchema)
+  });
   const router = useRouter();
   const [error, setError] = useState("");
 
@@ -41,12 +53,14 @@ const AddExpensePage = () => {
           size={"3"}
           {...register("title")}
         />
+        <ErrorMessage>{errors.title?.message}</ErrorMessage>
         <TextField.Root
           type="number"
           placeholder="1200"
           size={"3"}
           {...register("amount")}
         />
+        <ErrorMessage>{errors.amount?.message}</ErrorMessage>
         <Button>Add Expense</Button>
       </form>
     </div>

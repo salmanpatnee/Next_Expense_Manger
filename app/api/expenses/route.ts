@@ -1,11 +1,6 @@
 import prisma from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
-
-const createExpenseSchema = z.object({
-    title: z.string().min(3, 'Title is required').max(1000),
-    amount: z.string().min(0, 'An amount is required')
-})
+import { createExpenseSchema } from "@/app/validationSchemas";
 
 export const POST = async (request: NextRequest) => {
 
@@ -21,12 +16,14 @@ export const POST = async (request: NextRequest) => {
         const newExpense = await prisma.expense.create({
             data: {
                 title: body.title,
-                amount: parseFloat(body.amount),
+                amount: 160,
             },
         });
 
         return NextResponse.json(newExpense, { status: 201 });
     } catch (error) {
+        console.log(error);
+        
         return NextResponse.json({ error: "Failed to create expense" }, { status: 500 });
     }
 };
