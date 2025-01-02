@@ -7,10 +7,8 @@ import { useRouter } from "next/navigation";
 import { MdErrorOutline } from "react-icons/md";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createExpenseSchema } from "@/app/validationSchemas";
-import {z} from "zod"
+import { z } from "zod";
 import ErrorMessage from "@/app/components/ErrorMessage";
-
-
 
 // Instead of creating an interface
 /* interface ExpenseForm {
@@ -18,15 +16,32 @@ import ErrorMessage from "@/app/components/ErrorMessage";
 }*/
 
 //Created a type based on zod schema
-type ExpenseForm = z.infer<typeof createExpenseSchema>
+type ExpenseForm = z.infer<typeof createExpenseSchema>;
 
 const AddExpensePage = () => {
-  const { register, handleSubmit, formState: {errors} } = useForm<ExpenseForm>({
-    resolver: zodResolver(createExpenseSchema)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ExpenseForm>({
+    resolver: zodResolver(createExpenseSchema),
   });
+
+  const handleOnSubmit = handleSubmit(async (data) => {
+    try {
+      setSubmit(true);
+      await axios.post(`/api/expenses`, data);
+      router.push(`/expenses`);
+      setError("");
+    } catch (error) {
+      setSubmit(false);
+      setError("An unexpected error is occured.");
+    }
+  });
+
   const router = useRouter();
   const [error, setError] = useState("");
-  const [isSubmitting, setSubmit] = useState(false)
+  const [isSubmitting, setSubmit] = useState(false);
 
   return (
     <div className="max-w-xl ">
@@ -38,19 +53,7 @@ const AddExpensePage = () => {
           <Callout.Text>{error}</Callout.Text>
         </Callout.Root>
       )}
-      <form className="space-y-5"
-        onSubmit={handleSubmit(async (data) => {
-          try {
-            setSubmit(true)
-            await axios.post(`/api/expenses`, data);
-            router.push(`/expenses`);
-            setError('')
-          } catch (error) {
-            setSubmit(false)
-            setError("An unexpected error is occured.");
-          }
-        })}
-      >
+      <form className="space-y-5" onSubmit={handleOnSubmit}>
         <TextField.Root
           placeholder="Internet Fee"
           size={"3"}
@@ -64,7 +67,8 @@ const AddExpensePage = () => {
           {...register("amount")}
         />
         <ErrorMessage>{errors.amount?.message}</ErrorMessage>
-        <Button disabled={isSubmitting}>Add Expense {isSubmitting && <Spinner />}
+        <Button disabled={isSubmitting}>
+          Add Expense {isSubmitting && <Spinner />}
         </Button>
       </form>
     </div>
