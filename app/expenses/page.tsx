@@ -1,15 +1,14 @@
 import prisma from "@/prisma/client";
 import { Box, Button, Table } from "@radix-ui/themes";
 import Link from "next/link";
+import ExpenseAction from "./_components/ExpenseAction";
 
 const ExpensesPage = async () => {
   const expenses = await prisma.expense.findMany();
 
   return (
-    <Box>
-      <Button mb={"3"}>
-        <Link href="/expenses/add">Add Expense</Link>
-      </Button>
+    <Box className="space-y-3">
+      <ExpenseAction/>
       <Table.Root variant="surface">
         <Table.Header>
           <Table.Row>
