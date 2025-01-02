@@ -1,9 +1,13 @@
-import React from 'react'
+import { Button } from "@radix-ui/themes";
+import Link from "next/link";
+import React from "react";
 
 const ExpensesPage = () => {
   return (
-    <div>ExpensesPage</div>
-  )
-}
+    <Button>
+      <Link href="/expenses/add">Add Expense</Link>
+    </Button>
+  );
+};
 
-export default ExpensesPage
+export default ExpensesPage;

@@ -1,5 +1,5 @@
 "use client";
-import { Button, Callout, TextField } from "@radix-ui/themes";
+import { Button, Callout, Spinner, TextField } from "@radix-ui/themes";
 import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -26,6 +26,7 @@ const AddExpensePage = () => {
   });
   const router = useRouter();
   const [error, setError] = useState("");
+  const [isSubmitting, setSubmit] = useState(false)
 
   return (
     <div className="max-w-xl ">
@@ -40,10 +41,12 @@ const AddExpensePage = () => {
       <form className="space-y-5"
         onSubmit={handleSubmit(async (data) => {
           try {
+            setSubmit(true)
             await axios.post(`/api/expenses`, data);
             router.push(`/expenses`);
             setError('')
           } catch (error) {
+            setSubmit(false)
             setError("An unexpected error is occured.");
           }
         })}
@@ -61,7 +64,8 @@ const AddExpensePage = () => {
           {...register("amount")}
         />
         <ErrorMessage>{errors.amount?.message}</ErrorMessage>
-        <Button>Add Expense</Button>
+        <Button disabled={isSubmitting}>Add Expense {isSubmitting && <Spinner />}
+        </Button>
       </form>
     </div>
   );

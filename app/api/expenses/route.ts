@@ -16,7 +16,7 @@ export const POST = async (request: NextRequest) => {
         const newExpense = await prisma.expense.create({
             data: {
                 title: body.title,
-                amount: 160,
+                amount: parseFloat(body.amount) 
             },
         });
 
