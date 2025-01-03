@@ -1,7 +1,6 @@
 import prisma from "@/prisma/client";
-import { Box, Button, Table } from "@radix-ui/themes";
-import Link from "next/link";
-import ExpenseAction from "./_components/ExpenseAction";
+import { Box, Table } from "@radix-ui/themes";
+import ExpenseAction from "../_components/ExpenseAction";
 
 const ExpensesPage = async () => {
   const expenses = await prisma.expense.findMany();

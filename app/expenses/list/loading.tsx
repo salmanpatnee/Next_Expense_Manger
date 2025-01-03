@@ -1,6 +1,6 @@
 import { Box, Skeleton, Table, Text } from "@radix-ui/themes";
 import React from "react";
-import ExpenseAction from "./_components/ExpenseAction";
+import ExpenseAction from "../_components/ExpenseAction";
 
 const ExpenseLoadingPage = () => {
   const expenses = [1, 2, 3, 4, 5];

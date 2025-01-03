@@ -1,14 +1,14 @@
 "use client";
+import ErrorMessage from "@/app/components/ErrorMessage";
+import { createExpenseSchema } from "@/app/validationSchemas";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Callout, Spinner, TextField } from "@radix-ui/themes";
 import axios from "axios";
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { MdErrorOutline } from "react-icons/md";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { createExpenseSchema } from "@/app/validationSchemas";
 import { z } from "zod";
-import ErrorMessage from "@/app/components/ErrorMessage";
 
 // Instead of creating an interface
 /* interface ExpenseForm {
@@ -31,7 +31,7 @@ const AddExpensePage = () => {
     try {
       setSubmit(true);
       await axios.post(`/api/expenses`, data);
-      router.push(`/expenses`);
+      router.push(`/expenses/list`);
       setError("");
     } catch (error) {
       setSubmit(false);
