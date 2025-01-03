@@ -1,4 +1,4 @@
-import { Box, Skeleton, Table, Text } from "@radix-ui/themes";
+import { Box, Button, Skeleton, Table, Text } from "@radix-ui/themes";
 import React from "react";
 import ExpenseAction from "../_components/ExpenseAction";
 
@@ -14,6 +14,7 @@ const ExpenseLoadingPage = () => {
             <Table.ColumnHeaderCell>Expense</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>Amount</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>Date</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell>Actions</Table.ColumnHeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -38,6 +39,11 @@ const ExpenseLoadingPage = () => {
                 <Text>
                   <Skeleton>Thursday, 2 January 2025</Skeleton>
                 </Text>
+              </Table.Cell>
+              <Table.Cell>
+                  <Skeleton>
+                    <Button>Edit</Button>
+                  </Skeleton>
               </Table.Cell>
             </Table.Row>
           ))}
