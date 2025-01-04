@@ -14,7 +14,7 @@ const DeleteButton = ({ id }: { id: number }) => {
     try {
       setDeleting(true);
       await axios.delete(`/api/expenses/${id}`);
-      router.push(`/expenses/list`);
+      // router.push(`/expenses/list`);
       router.refresh();
       setDeleting(false);
     } catch (error) {
