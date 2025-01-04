@@ -35,23 +35,21 @@ export async function PATCH(
   return NextResponse.json(updatedExpense);
 }
 
-// export async function DELETE(
-//   request: NextRequest,
-//   { params }: { params: { id: string } }
-// ) {
-//   const session = await getServerSession(authOptions);
-//   if (!session) return NextResponse.json({}, { status: 401 });
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
 
-//   const ticket = await prisma.ticket.findUnique({
-//     where: { id: parseInt(params.id) },
-//   });
+  const expense = await prisma.expense.findUnique({
+    where: { id: parseInt(params.id) },
+  });
 
-//   if (!ticket)
-//     return NextResponse.json({ error: "Invalid ticket" }, { status: 404 });
+  if (!expense)
+    return NextResponse.json({ error: "Invalid expense" }, { status: 404 });
 
-//   await prisma.ticket.delete({
-//     where: { id: ticket.id },
-//   });
+  await prisma.expense.delete({
+    where: { id: expense.id },
+  });
 
-//   return NextResponse.json({});
-// }
+  return NextResponse.json({});
+}
