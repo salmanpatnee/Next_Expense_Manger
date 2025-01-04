@@ -10,7 +10,6 @@ const ExpenseLoadingPage = () => {
       <Table.Root variant="surface">
         <Table.Header>
           <Table.Row>
-            <Table.ColumnHeaderCell>S.No</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>Expense</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>Amount</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>Date</Table.ColumnHeaderCell>
@@ -20,11 +19,6 @@ const ExpenseLoadingPage = () => {
         <Table.Body>
           {expenses.map((expense) => (
             <Table.Row key={expense}>
-              <Table.Cell>
-                <Text>
-                  <Skeleton>1000</Skeleton>
-                </Text>
-              </Table.Cell>
               <Table.Cell>
                 <Text>
                   <Skeleton>Bike Petrol</Skeleton>
@@ -41,9 +35,9 @@ const ExpenseLoadingPage = () => {
                 </Text>
               </Table.Cell>
               <Table.Cell>
-                  <Skeleton>
-                    <Button>Edit</Button>
-                  </Skeleton>
+                <Skeleton>
+                  <Button>Edit</Button>
+                </Skeleton>
               </Table.Cell>
             </Table.Row>
           ))}

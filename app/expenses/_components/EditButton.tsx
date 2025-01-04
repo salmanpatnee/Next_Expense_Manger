@@ -3,10 +3,9 @@ import { Button } from "@radix-ui/themes";
 import Link from "next/link";
 
 interface Props {
-  id: number;
+  id: number
 }
-
-const ActionButtons = ({ id }: Props) => {
+const EditButton = ({ id }: Props) => {
   return (
     <Button variant="ghost" className="hover:bg-transparent">
       <Link
@@ -19,4 +18,4 @@ const ActionButtons = ({ id }: Props) => {
   );
 };
 
-export default ActionButtons;
+export default EditButton;
