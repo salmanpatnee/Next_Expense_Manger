@@ -38,4 +38,6 @@ const ExpensesPage = async () => {
   );
 };
 
+export const dynamic = "force-cache";
+
 export default ExpensesPage;

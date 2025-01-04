@@ -41,6 +41,7 @@ const ExpenseForm = ({ expense }: Props) => {
         await axios.post(`/api/expenses`, data);
       }
       router.push(`/expenses/list`);
+      router.refresh();
       setError("");
     } catch (error) {
       setSubmit(false);

@@ -1,13 +1,3 @@
-import { Box, Skeleton } from "@radix-ui/themes";
+import ExpenseFormSkeleton from "../_components/ExpenseFormSkeleton";
 
-const AddExpenseLoadingPage = () => {
-  return (
-    <Box className="space-y-5">
-      <Skeleton width={"575px"} height={"40px"} />
-      <Skeleton width={"575px"} height={"40px"} />
-      <Skeleton width={"110px"} height={"40px"} />
-    </Box>
-  );
-};
-
-export default AddExpenseLoadingPage;
+export default ExpenseFormSkeleton;
