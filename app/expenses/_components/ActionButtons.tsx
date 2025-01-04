@@ -10,7 +10,7 @@ const ActionButtons = ({ id }: Props) => {
   return (
     <Button variant="ghost" className="hover:bg-transparent">
       <Link
-        href={`/expenses/${id}/edit`}
+        href={`/expenses/edit/${id}`}
         className="text-blue-400 hover:text-blue-600 transition-colors"
       >
         <Pencil1Icon />
