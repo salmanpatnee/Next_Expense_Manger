@@ -35,7 +35,11 @@ const ExpenseForm = ({ expense }: Props) => {
   const handleOnSubmit = handleSubmit(async (data) => {
     try {
       setSubmit(true);
-      await axios.post(`/api/expenses`, data);
+      if (expense) {
+        await axios.patch(`/api/expenses/${expense.id}`, data);
+      } else {
+        await axios.post(`/api/expenses`, data);
+      }
       router.push(`/expenses/list`);
       setError("");
     } catch (error) {
@@ -75,7 +79,8 @@ const ExpenseForm = ({ expense }: Props) => {
         />
         <ErrorMessage>{errors.amount?.message}</ErrorMessage>
         <Button disabled={isSubmitting}>
-          Add Expense {isSubmitting && <Spinner />}
+          {expense ? "Update Expense" : "Add Expense"}{" "}
+          {isSubmitting && <Spinner />}
         </Button>
       </form>
     </div>
