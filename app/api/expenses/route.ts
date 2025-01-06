@@ -1,11 +1,10 @@
-import prisma from "@/prisma/client";
-import { NextRequest, NextResponse } from "next/server";
-import { createExpenseSchema } from "@/app/validationSchemas";
-import { getServerSession } from "next-auth";
 import authOptions from "@/app/auth/authOptions";
+import { createExpenseSchema } from "@/app/validationSchemas";
+import prisma from "@/prisma/client";
+import { getServerSession } from "next-auth";
+import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (request: NextRequest) => {
-    
   const session = await getServerSession(authOptions);
   if (!session) {
     return NextResponse.json({}, { status: 401 });
@@ -20,10 +19,19 @@ export const POST = async (request: NextRequest) => {
   }
 
   try {
+    const user = await prisma.user.findUnique({
+      where: { email: session.user?.email! },
+    });
+
+    if (!user) {
+      return NextResponse.json({ error: "User not found." }, { status: 404 });
+    }
+
     const newExpense = await prisma.expense.create({
       data: {
         title: body.title,
         amount: parseFloat(body.amount),
+        userId: user.id,
       },
     });
 

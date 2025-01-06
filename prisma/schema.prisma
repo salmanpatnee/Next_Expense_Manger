@@ -19,8 +19,8 @@ model Expense {
   title  String
   amount Float
   date   DateTime @default(now())
-  userId String?  @db.VarChar(255)
-  user   User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String   @db.VarChar(255)
+  user   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Account {
