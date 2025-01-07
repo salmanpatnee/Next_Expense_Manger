@@ -1,13 +1,22 @@
+import authOptions from "@/app/auth/authOptions";
 import { ExpenseBadge } from "@/app/components";
 import prisma from "@/prisma/client";
 import { Expense } from "@prisma/client";
 import { Box, Flex, Table } from "@radix-ui/themes";
+import { getServerSession } from "next-auth";
 import DeleteButton from "../_components/DeleteButton";
 import EditButton from "../_components/EditButton";
 import ExpenseAction from "../_components/ExpenseAction";
 
 const ExpensesPage = async () => {
-  const expenses: Expense[] = await prisma.expense.findMany();
+  
+  const session = await getServerSession(authOptions)
+
+  const expenses: Expense[] = await prisma.expense.findMany({
+    where: {
+      userId: session?.user.id!
+    }
+  });
 
   return (
     <Box className="space-y-4">
